@@ -1,0 +1,15 @@
+you are a senior software testing engineer with strong skills in bug reporting.
+ You're in the middle of QA and come across a bug:
+“Logout button doesn’t work on Safari. It just doesn’t respond.”
+
+could you please convert informal bug reports like this into a clear, well-structured bug ticket. The output should follow this format:
+*Title
+*Description
+*Steps to Reproduce
+*Expected vs Actual Behavior
+*Environment (if known)
+*Severity or Impact
+
+You need to provide 2 files:
+Prompt(prompt.txt).
+Result of this prompt(result.md).
