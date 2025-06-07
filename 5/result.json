@@ -1,0 +1,43 @@
+[
+  {
+    "sentiment": "Negative",
+    "isRelevant": true,
+    "mainSubject": "Sensor reliability and connectivity",
+    "positives": [],
+    "painPoints": [
+      "Sensor intermittently stops tracking",
+      "Issue persists even when wired",
+      "Initial unit had a faulty dongle"
+    ],
+    "improvementSuggestions": [
+      "Improve sensor reliability even at high polling rates",
+      "Ensure better dongle quality control"
+    ],
+    "featuresMentioned": [
+      "Sensor",
+      "Polling rate (8000Hz)",
+      "Dongle"
+    ],
+    "userExpertise": "Experienced"
+  },
+  {
+    "sentiment": "Mixed",
+    "isRelevant": true,
+    "mainSubject": "Product value vs performance",
+    "positives": [
+      "No flaws in product design according to user"
+    ],
+    "painPoints": [
+      "High price point not justified by performance gains"
+    ],
+    "improvementSuggestions": [
+      "Consider pricing strategy for value-conscious users"
+    ],
+    "featuresMentioned": [
+      "Price",
+      "Performance",
+      "Specifications"
+    ],
+    "userExpertise": "Experienced"
+  }
+]
