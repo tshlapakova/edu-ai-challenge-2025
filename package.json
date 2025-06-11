@@ -1,0 +1,66 @@
+{
+  "name": "sea-battle-cli",
+  "version": "2.0.0",
+  "description": "A modernized command-line implementation of the classic Sea Battle (Battleship) game",
+  "type": "module",
+  "main": "src/main.js",
+  "bin": {
+    "sea-battle": "src/main.js"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "dev": "node --inspect src/main.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:verbose": "jest --verbose",
+    "test:ci": "jest --coverage --watchAll=false",
+    "test:unit": "jest test/ --coverage"
+  },
+  "keywords": [
+    "battleship",
+    "sea-battle",
+    "cli-game",
+    "terminal-game",
+    "javascript",
+    "es6"
+  ],
+  "author": "Sea Battle Development Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/example/sea-battle-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/example/sea-battle-cli/issues"
+  },
+  "homepage": "https://github.com/example/sea-battle-cli#readme",
+  "devDependencies": {
+    "@babel/core": "^7.27.4",
+    "@babel/preset-env": "^7.27.2",
+    "babel-jest": "^30.0.0",
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/main.js"
+    ],
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "html"
+    ],
+    "testMatch": [
+      "**/test/**/*.test.js"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
+  }
+}
