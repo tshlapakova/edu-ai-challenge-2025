@@ -1,0 +1,83 @@
+## 🔍 Step 1: Analyze the Project Requirements
+
+1. Social Platform with Millions of Users  
+   - Implication: High data volume and concurrency  
+   - Need: Horizontal scalability and high availability  
+
+2. Data Types: Profiles, Posts, Connections  
+   - Profiles: Semi-structured  
+   - Posts: Content + timestamps (feeds)  
+   - Connections: Graph relationships  
+
+3. High Read Performance  
+   - Optimize for fast, low-latency queries  
+
+4. 80% Reads / 20% Writes  
+   - Read-optimized design needed (caching, replication, indexing)  
+
+5. Scalability  
+   - Must support rapid growth—scale-out preferred  
+
+---
+
+## 📚 Step 2: Map Requirements to Database Models
+
+Evaluated models:  
+1. Relational (RDBMS)  
+2. Document Store (MongoDB)  
+3. Wide Column Store (Cassandra)  
+4. Graph DB (Neo4j)  
+5. Search Engine DB (Elasticsearch)  
+
+---
+
+## 🔎 Step 3: Evaluate Trade-offs for Each Model
+
+1. **RDBMS**  
+   - Pros: Strong consistency, SQL support  
+   - Cons: Poor at massive scale with graph queries  
+   - Verdict: Not optimal  
+
+2. **MongoDB**  
+   - Pros: Good for semi-structured data (profiles/posts), scalable, fast reads  
+   - Cons: Weak in graph querying  
+   - Verdict: Strong for profiles and posts  
+
+3. **Cassandra**  
+   - Pros: High throughput, time-series friendly  
+   - Cons: Complex joins/traversals are hard  
+   - Verdict: Good for posts/feed storage  
+
+4. **Neo4j**  
+   - Pros: Ideal for user connections/graph traversal  
+   - Cons: Not as scalable for high-volume reads  
+   - Verdict: Best for user connections  
+
+5. **Elasticsearch**  
+   - Pros: Excellent for search and ranked feed  
+   - Cons: Not a primary data store  
+   - Verdict: Useful as a secondary system  
+
+---
+
+## 🧠 Step 4: Compose a Multi-Database Architecture (Polyglot Persistence)
+
+| Use Case             | Database      | Reason                                          |
+|----------------------|---------------|-------------------------------------------------|
+| User Profiles         | MongoDB       | Semi-structured, fast reads                     |
+| Posts / Feeds         | Cassandra     | Scalable, fast for reads/writes, time-ordered   |
+| User Connections      | Neo4j         | Graph traversal and social structure analysis   |
+| Feed Search/Ranking   | Elasticsearch | Full-text and ranked query capabilities         |
+
+---
+
+## ✅ Final Decision
+
+**Recommended Architecture**:  
+Use a combination of **MongoDB**, **Cassandra**, **Neo4j**, and optionally **Elasticsearch**.
+
+This approach ensures:
+- Scalability  
+- High read performance  
+- Appropriate modeling for structured, semi-structured, and graph data  
+- Clean separation of responsibilities across data models

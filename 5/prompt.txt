@@ -1,0 +1,19 @@
+firstly using Few-shot learning familiar with examples of analyzing feedbacks in the attached file
+
+then you need to analyze product feedback comments below and extract key insights in a structured JSON format that can be integrated with product team workflows. analyze the feedback only if it is relevant to the product. If not, set isRelevant to false and skip further analysis.
+
+Below are two feedback samples for you to work with:
+Sample 1: "Sensor just stops tracking for like a half second kinda often even at 8000hz. I've also tried it plugged in and still the same problem. First one I got I had to return also because the dongle just didnt work, $150 mouse btw"
+Sample 2: "Is it worth it? It is a product with no flaws in my opinion, if you love it go for it, but its not worth the price since you'll be able to perform the same with a cheaper product with half the specs."
+
+your response should adheres to the following structure and should be provided in downloadable json file result.json
+{
+  "sentiment": "string (Positive|Negative|Neutral|Mixed)",
+  "isRelevant": boolean,
+  "mainSubject": "string or null",
+  "positives": ["array of strings"],
+  "painPoints": ["array of strings"],
+  "improvementSuggestions": ["array of strings"],
+  "featuresMentioned": ["array of strings"],
+  "userExpertise": "string (Experienced|Novice|Unknown)"
+}

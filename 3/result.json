@@ -1,0 +1,13 @@
+{
+  "summary": "The document discusses the rise of remote work, especially following the global pandemic. It outlines the benefits such as increased job satisfaction, flexibility, and cost savings for companies. It also highlights challenges including employee isolation, productivity issues, and management difficulties. Despite these concerns, remote work is expected to remain prevalent, with hybrid models and advancing technology supporting this shift.",
+  "sentiment": {
+    "classification": "neutral",
+    "score": 0
+  },
+  "metadata": {
+    "source": "task_3_input.docx",
+    "topic": "Remote Work Trends and Impacts",
+    "analysis_timestamp": "2025-06-04T00:00:00Z",
+    "language": "en"
+  }
+}
