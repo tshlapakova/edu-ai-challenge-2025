@@ -1,0 +1,74 @@
+{
+  "name": "robust-validation-library",
+  "version": "1.0.0",
+  "description": "A comprehensive, type-safe validation library for JavaScript that supports both primitive and complex data structures",
+  "type": "module",
+  "main": "validation/index.js",
+  "exports": {
+    ".": "./validation/index.js",
+    "./string": "./validation/validators/string.js",
+    "./number": "./validation/validators/number.js",
+    "./boolean": "./validation/validators/boolean.js",
+    "./array": "./validation/validators/array.js",
+    "./object": "./validation/validators/object.js",
+    "./base": "./validation/base.js"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:verbose": "jest --verbose",
+    "examples": "node validation/examples.js",
+    "lint": "eslint validation/ test/"
+  },
+  "keywords": [
+    "validation",
+    "validator",
+    "schema",
+    "type-checking",
+    "data-validation",
+    "javascript",
+    "es6",
+    "fluent-api",
+    "type-safe"
+  ],
+  "author": "Validation Library Development Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/example/robust-validation-library.git"
+  },
+  "bugs": {
+    "url": "https://github.com/example/robust-validation-library/issues"
+  },
+  "homepage": "https://github.com/example/robust-validation-library#readme",
+  "devDependencies": {
+    "@babel/core": "^7.27.4",
+    "@babel/preset-env": "^7.27.2",
+    "babel-jest": "^30.0.0",
+    "jest": "^29.7.0",
+    "eslint": "^8.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "validation/**/*.js",
+      "!validation/examples.js"
+    ],
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "html"
+    ],
+    "testMatch": [
+      "**/test/**/*.test.js"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
+  }
+} 
