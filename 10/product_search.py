@@ -7,6 +7,7 @@ Uses OpenAI function calling to filter products based on natural language prefer
 import json
 import os
 import sys
+import re
 from typing import List, Dict, Any
 from openai import OpenAI
 import getpass
@@ -95,10 +96,37 @@ def filter_products(products: List[Dict[str, Any]], filters: Dict[str, Any]) -> 
     if filters.get("in_stock_only"):
         filtered = [p for p in filtered if p["in_stock"]]
     
-    # Filter by keywords in product name
+    # Filter by keywords in product name (word boundary matching)
     if filters.get("keywords"):
         keywords = [kw.lower() for kw in filters["keywords"]]
-        filtered = [p for p in filtered if any(kw in p["name"].lower() for kw in keywords)]
+        result_filtered = []
+        for product in filtered:
+            product_name = product["name"].lower()
+            
+            # Check if any keyword matches as a whole word or part of a compound word
+            match_found = False
+            for keyword in keywords:
+                # Use word boundary regex for exact word matching
+                pattern = r'\b' + re.escape(keyword) + r'\b'
+                if re.search(pattern, product_name):
+                    match_found = True
+                    break
+                    
+                # Also check for exact matches in compound words (like "smartphone")
+                if keyword in product_name and len(keyword) >= 4:
+                    # Only match if keyword is significant part of a word
+                    words = product_name.split()
+                    for word in words:
+                        if keyword in word and (len(keyword) / len(word)) > 0.6:
+                            match_found = True
+                            break
+                    if match_found:
+                        break
+            
+            if match_found:
+                result_filtered.append(product)
+        
+        filtered = result_filtered
     
     return filtered
 
@@ -160,14 +188,26 @@ Based on the user's natural language query, extract the relevant filtering crite
 
 Available categories: Electronics, Fitness, Kitchen, Books, Clothing
 
-Be intelligent about interpreting natural language:
-- "cheap" or "affordable" might mean max_price around 50
-- "expensive" or "premium" might mean min_price around 200
-- "good rating" might mean min_rating of 4.0
-- "great" or "excellent" rating might mean min_rating of 4.5
-- "smartphone", "phone" should look for keywords like ["smartphone", "phone"]
-- "laptop", "computer" should look for keywords like ["laptop", "computer"]
-- etc.
+IMPORTANT KEYWORD GUIDELINES:
+- Be VERY SPECIFIC with keywords - use exact product type names
+- For "smartphone" search, use keywords: ["smartphone"] (NOT "phone" as it matches "headphones")
+- For "phone" search, use keywords: ["phone"] only if user specifically says "phone"
+- For "laptop" search, use keywords: ["laptop"] 
+- For "headphones" search, use keywords: ["headphones"]
+- For "watch" search, use keywords: ["watch"]
+- Avoid generic keywords that could match unrelated products
+
+Price interpretation:
+- "cheap" or "affordable" = max_price around 50
+- "expensive" or "premium" = min_price around 200
+- "good rating" = min_rating of 4.0
+- "great" or "excellent" rating = min_rating of 4.5
+
+Examples:
+- "I want a smartphone" → keywords: ["smartphone"]
+- "Show me phones" → keywords: ["phone"] 
+- "I need headphones" → keywords: ["headphones"]
+- "Find a laptop" → keywords: ["laptop"]
 """
             
             # Make API call with function calling
